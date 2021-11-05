@@ -1,0 +1,62 @@
+-- DDL  CRIACAO DA TABELA PARA EXERCICIOS
+-- script 39
+
+USE curso; -- Para usar o bd desejado 
+
+CREATE TABLE FUNCIONARIOS
+(
+ ID INT NOT NULL AUTO_INCREMENT, -- alto AUTO_INCREMENT ele vai seguir sequencia   
+ NOME VARCHAR(50) NOT NULL, -- not null e que ele nao guarda valor null
+ SALARIO DECIMAL(10,2),
+ SETOR VARCHAR(30),
+ PRIMARY KEY (id) -- chave primaria 
+);
+
+-- DML SELECT
+-- EXEMPLO SELECT
+-- script 40
+SELECT *
+FROM funcionarios;
+
+-- script 41	 
+-- EXEMPLO SELECT
+SELECT nome,setor AS depto
+FROM funcionarios;
+
+-- script 42
+-- DML INSERT
+INSERT INTO funcionarios (nome,salario,setor) VALUES 
+('Joao',1000,''),('Jose',2000,''),('Alexandre',3000,'');-- para add dados 
+-- OU
+-- script 43
+INSERT INTO funcionarios (nome,salario) VALUES ('Moises','assas'); -- exemplo de uma entrada int e digitando texto
+-- script 44
+-- simulando erro
+INSERT INTO funcionarios (nome,salario) VALUES ('Fael',1800); -- exemplo adicionando uma pessoal sem o depto
+
+-- script 45
+-- DML UPDATE
+UPDATE funcionarios SET salario = 1500
+WHERE id=1;
+
+-- script 46
+-- OU Aumento de 50% sobre Salário atual.
+UPDATE funcionarios SET salario=salario*1.5
+WHERE id='1'; 
+
+-- script 46
+-- exemplo update com mais de um campo
+UPDATE funcionarios SET salario=salario*1.5,setor='TI'
+WHERE id<>'1';
+
+-- script 47
+-- DML DELETE
+DELETE
+FROM funcionarios
+WHERE id='1';
+
+-- script 49
+-- DML SELECT EVIDENCIA DA EXCLUSAO
+SELECT *
+FROM funcionarios
+WHERE id='1';
