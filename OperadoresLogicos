@@ -1,0 +1,132 @@
+--------------------------------------------------------------------------Operadores Logicos--------------------------------------------------------------------------
+-- OPERADOR WHERE 
+SELECT *
+FROM senso 
+WHERE nome_mun='Jundiai'
+
+-- OPERADOR AND 
+SELECT *
+FROM senso 
+WHERE cod_uf ='35'
+AND populacao > 5000
+AND ano='2014';
+
+-- OPERADOR BETWEEN
+SELECT * FROM senso 
+WHERE cod_uf ='35'
+AND populacao BETWEEN 5000 AND 10000 -- Entre esses valores 
+AND ano='2014'
+ORDER BY populacao DESC; -- esta trasendo o maior para o menor 
+
+-- OPERADOR IN 
+SELECT * FROM senso 
+WHERE cod_uf IN('35','12')-- seleciona os valores exatos que voce deseja
+AND ano='2014'
+
+-- OPERADOR NOT IT 
+SELECT * FROM senso 
+WHERE cod_uf not IN('35','12')-- seleciona os valores exatos que voce não deseja
+AND ano='2014'
+
+
+-- LIKE LOCALIZA VALORES QUE CONTENHAM "OR" EM QUALQUER LUGAR 
+SELECT * FROM senso 
+WHERE nome_mun LIKE ('%or%')-- busca todos os dados que tenha essas Paravras ou letras dentro de % 
+AND ano='2014'
+
+
+-- LIKE encontra quaisquer valores que tenham "r" na segunda posição
+SELECT * FROM senso 
+WHERE nome_mun LIKE '_rg%'-- like encontra valores que tenha essas letras dentro de % que esteja em segunda posição
+AND ano='2014';
+
+-- LIKE Localiza valores que comecam com "a" e possuem pelos menos 3 caracteres de comprime 
+SELECT * FROM senso 
+WHERE nome_mun LIKE 'a_%_%_%_%_%_%' -- a quantidade de _% indica o tamanho da palavra 
+AND ano='2014';
+
+-- LIKE localiza valores que comecam com "a" e terminam com "o"
+SELECT * FROM senso 
+WHERE nome_mun LIKE 'a%O' -- voce sempre precisa colocar o "a" siginifica inicio/"%" Siginifica meio/"o" significa fim 
+AND ano='2014';
+
+-- LIKE localiza valores que comecam com "a"
+SELECT * FROM senso 
+WHERE nome_mun LIKE 'a%' -- localiza as palavra que comecam com a 
+AND ano='2014';
+
+
+-- Operador LIKE CORINGA 
+SELECT * FROM senso 
+WHERE Nome_mun LIKE '_ra%' -- mostra tudo que tem "ra"
+AND ano='2014';
+
+-- Operador NOT
+SELECT ano,cod_uf,estado,nome_mun,populacao FROM senso 
+WHERE nome_mun NOT LIKE ('A%')
+AND cod_uf='35'
+AND NOT populacao < 40000
+AND ano='2014';
+
+-- Operador OR 
+SELECT * FROM senso 
+WHERE nome_mun LIKE ('A%')
+AND (cod_uf= '35' OR cod_uf='15')-- 35 ou 15
+
+-- Operador IS NOT NULL
+SELECT * FROM senso 
+WHERE regiao IS NOT NULL;-- todos os valores que são null
+
+
+-- Operador IS NULL
+SELECT * FROM senso 
+WHERE regiao IS NULL;-- todos os valores que não são null
+
+-- preparando cenario is null
+SELECT * FROM senso 
+WHERE regiao='' -- puxa so os null 
+
+UPDATE senso SET regiao = NULL -- deixa tudo null 
+WHERE regiao = '';
+
+UPDATE senso SET regiao =''
+WHERE regiao IS NULL;
+
+
+-- OPERADOR HAVING 
+SELECT cod_uf, COUNT(*)qtd 
+from senso 
+WHERE ano='2014'
+GROUP BY cod_uf HAVING COUNT(cod_mun)>500 -- esse count pega a quantidade e joga para o COUNT de baixo e compara ele com 500
+
+
+-- OPERADOR HAVING 
+SELECT cod_uf,estado, COUNT(*)qtd -- esse count pega a quantidade e joga para o COUNT de baixo e compara ele com 500
+from senso 
+WHERE ano='2014'
+GROUP BY cod_uf,estado HAVING COUNT(cod_mun)<500
+
+-- OPERADOR HAVING 
+SELECT cod_uf,estado, COUNT(cod_mun)qtd,-- ta pegando a quantidade cod_mun
+			SUM(populacao)-- ta pegando a quantidade populacao
+FROM senso 
+WHERE ano='2014'
+GROUP BY cod_uf,estado HAVING SUM(populacao)>500000;-- tudo que for maior que 500000
+
+SELECT 1+2*3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
